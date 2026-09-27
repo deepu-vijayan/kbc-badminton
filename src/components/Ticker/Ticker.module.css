@@ -1,0 +1,66 @@
+/* Volt tape running under the hero, tilted slightly off-axis. */
+.ticker {
+  position: relative;
+  z-index: 5;
+  margin: -18px -2% 0;
+  background: var(--volt);
+  color: var(--charcoal-950);
+  overflow: hidden;
+  white-space: nowrap;
+  transform: rotate(-1.2deg);
+  box-shadow: 0 0 40px -8px var(--volt-glow);
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  animation: scroll 24s linear infinite;
+  padding: 14px 0;
+}
+
+.ticker:hover .track {
+  animation-play-state: paused;
+}
+
+.item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding-right: 34px;
+}
+
+.item b {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 900;
+  font-stretch: 120%;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+.item::after {
+  content: "//";
+  font-weight: 700;
+  padding-left: 34px;
+  opacity: 0.5;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

@@ -1,0 +1,225 @@
+.sessions {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.ghost {
+  top: 60px;
+  left: 38%;
+}
+
+.sessions :global(.wrap) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Asymmetric: wide timetable, narrower pricing column pushed down. */
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.side {
+  margin-top: 64px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table caption {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--volt);
+  margin-bottom: 16px;
+}
+
+.table th {
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  font-weight: 500;
+  padding: 0 16px 14px;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.table td {
+  position: relative;
+  padding: 20px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+  transition: background 0.25s ease, color 0.25s ease, padding 0.35s var(--ease-kinetic);
+}
+
+.table td:first-child::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--volt);
+  box-shadow: 0 0 14px var(--volt-glow);
+  transition: width 0.35s var(--ease-kinetic);
+}
+
+.table tbody tr:hover td {
+  background: var(--surface);
+}
+
+.table tbody tr:hover td:first-child {
+  padding-left: 26px;
+}
+
+.table tbody tr:hover td:first-child::before {
+  width: 4px;
+}
+
+.table tbody tr:hover .time {
+  color: var(--volt);
+}
+
+.table td.time {
+  color: var(--fg-muted);
+  white-space: nowrap;
+}
+
+.dayTag {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 115%;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+}
+
+.priceCards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.priceCard {
+  padding: 30px 28px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.priceCard.highlight {
+  border-color: var(--volt);
+  box-shadow: 0 0 0 1px var(--volt), 0 0 32px -12px var(--volt-glow);
+}
+
+.tag {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+  background: var(--volt);
+  color: var(--charcoal-950);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.who {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 900;
+  font-stretch: 115%;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.who span {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-stretch: 100%;
+  text-transform: none;
+  color: var(--fg-muted);
+}
+
+.amount {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 3.8rem);
+  font-weight: 900;
+  font-stretch: 120%;
+  font-style: italic;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  transition: color 0.3s ease, transform 0.45s var(--ease-kinetic);
+}
+
+.highlight .amount {
+  color: var(--volt);
+}
+
+.priceCard:hover .amount {
+  transform: translateX(-6px) skewX(-6deg);
+}
+
+.amount sub {
+  margin-left: 4px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  vertical-align: baseline;
+  color: var(--fg-muted);
+}
+
+.bookBtn {
+  margin-top: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .side {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .table th,
+  .table td {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .table td {
+    font-size: 0.9rem;
+  }
+  .table td.time {
+    font-size: 0.8rem;
+  }
+  .dayTag {
+    font-size: 0.95rem;
+  }
+}

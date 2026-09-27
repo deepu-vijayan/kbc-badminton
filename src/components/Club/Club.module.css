@@ -1,0 +1,123 @@
+.club {
+  overflow: hidden;
+}
+
+.ghost {
+  top: 40px;
+  right: -2vw;
+}
+
+/* 12-column asymmetric grid: copy runs wide on the left, the court
+   floats narrower on the right and sits lower, feature cards stagger. */
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 72px;
+  align-items: start;
+}
+
+.copy {
+  grid-column: 1 / span 7;
+}
+
+.copy h2 {
+  margin-top: 18px;
+  font-size: clamp(2.4rem, 5.2vw, 4.6rem);
+}
+
+.copy h2 em {
+  font-style: italic;
+  color: var(--volt);
+}
+
+.copy p:not(:global(.eyebrow)) {
+  margin-top: 22px;
+  color: var(--fg-muted);
+  max-width: 54ch;
+}
+
+.copy p:first-of-type {
+  margin-top: 0;
+}
+
+.copy h2 + p {
+  margin-top: 30px;
+}
+
+.court {
+  grid-column: 9 / span 4;
+  margin-top: 96px;
+}
+
+.features {
+  grid-column: 1 / -1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.feature {
+  padding: 30px 28px 32px;
+}
+
+.feature:nth-child(2) {
+  margin-top: 40px;
+}
+
+.feature:nth-child(3) {
+  margin-top: 80px;
+}
+
+.num {
+  display: block;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  color: var(--fg-muted);
+  margin-bottom: 42px;
+  transition: color 0.3s ease, letter-spacing 0.4s var(--ease-kinetic);
+}
+
+.feature:hover .num {
+  color: var(--volt);
+  letter-spacing: 0.3em;
+}
+
+:global(.kcard--blue).feature:hover .num {
+  color: var(--blue-bright);
+}
+
+.feature h3 {
+  font-size: 1.3rem;
+  font-stretch: 112%;
+}
+
+.feature p {
+  margin-top: 12px;
+  color: var(--fg-muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 900px) {
+  .copy,
+  .court,
+  .features {
+    grid-column: 1 / -1;
+  }
+  .court {
+    margin-top: 0;
+    max-width: 380px;
+  }
+  .features {
+    grid-template-columns: 1fr;
+  }
+  .feature:nth-child(n) {
+    margin-top: 0;
+  }
+}

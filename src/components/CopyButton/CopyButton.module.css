@@ -1,0 +1,180 @@
+.copy {
+  --cb-fg: var(--white);
+  --cb-border: var(--border-strong);
+  --cb-hover: var(--volt);
+  --cb-hover-glow: var(--volt-glow);
+  --cb-done-bg: var(--volt);
+  --cb-done-fg: var(--charcoal-950);
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.volt {
+  --cb-fg: var(--charcoal-950);
+  --cb-border: rgba(11, 13, 16, 0.4);
+  --cb-hover: var(--charcoal-950);
+  --cb-hover-glow: rgba(11, 13, 16, 0.25);
+  --cb-done-bg: var(--charcoal-950);
+  --cb-done-fg: var(--volt);
+}
+
+.button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--cb-size, 34px);
+  height: var(--cb-size, 34px);
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--cb-border);
+  color: var(--cb-fg);
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.3s ease,
+    box-shadow 0.3s ease, transform 0.35s var(--ease-kinetic);
+}
+
+/* corner tick, echoing the kinetic cards */
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid var(--cb-hover);
+  border-left: 2px solid var(--cb-hover);
+  transition: width 0.35s var(--ease-kinetic), height 0.35s var(--ease-kinetic);
+}
+
+.button:hover {
+  border-color: var(--cb-hover);
+  color: var(--cb-hover);
+  box-shadow: 0 0 0 1px var(--cb-hover), 0 0 18px -4px var(--cb-hover-glow);
+  transform: translateY(-2px);
+}
+
+.button:hover::before {
+  width: 12px;
+  height: 12px;
+}
+
+.button:active {
+  transform: translateY(0) scale(0.94);
+}
+
+.button svg {
+  grid-area: 1 / 1;
+  width: 55%;
+  height: 55%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
+  transition: opacity 0.25s ease, transform 0.45s var(--ease-kinetic),
+    filter 0.35s ease;
+}
+
+/* on hover the back sheet slides out a touch, like it's being pulled */
+.iconCopy path {
+  transition: transform 0.4s var(--ease-kinetic);
+}
+
+.button:hover .iconCopy path {
+  transform: translate(-1.5px, -1.5px);
+}
+
+.iconCheck {
+  opacity: 0;
+  transform: translateX(-10px) scale(0.6);
+  filter: blur(4px);
+}
+
+.iconCheck path {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 22;
+  transition: stroke-dashoffset 0.4s var(--ease-kinetic) 0.08s;
+}
+
+/* copied: fill snaps in, copy icon blurs away, check draws itself */
+.copied .button {
+  background: var(--cb-done-bg);
+  border-color: var(--cb-done-bg);
+  color: var(--cb-done-fg);
+  box-shadow: 0 0 22px -4px var(--cb-hover-glow);
+}
+
+.copied .button::before {
+  border-color: var(--cb-done-fg);
+}
+
+.copied .iconCopy {
+  opacity: 0;
+  transform: translateX(10px) scale(0.7);
+  filter: blur(4px);
+}
+
+.copied .iconCheck {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.copied .iconCheck path {
+  stroke-dashoffset: 0;
+}
+
+.failed .button {
+  border-color: var(--blue-bright);
+  color: var(--blue-bright);
+}
+
+.toast {
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  padding: 4px 8px;
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: var(--cb-done-bg);
+  color: var(--cb-done-fg);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 6px) skewX(-10deg);
+  filter: blur(4px);
+  transition: opacity 0.25s ease, transform 0.4s var(--ease-kinetic),
+    filter 0.3s ease;
+}
+
+.toast:empty {
+  padding: 0;
+}
+
+.copied .toast,
+.failed .toast {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  filter: none;
+}
+
+.failed .toast {
+  background: var(--blue);
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .button svg,
+  .iconCheck path,
+  .iconCopy path,
+  .toast {
+    transition: none;
+  }
+}

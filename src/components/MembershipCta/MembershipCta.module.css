@@ -1,0 +1,167 @@
+.band {
+  padding: 0;
+  background: var(--volt);
+  color: var(--charcoal-950);
+  overflow: hidden;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  min-height: 560px;
+}
+
+.copy {
+  align-self: center;
+  padding: 104px 48px 104px 0;
+  padding-left: max(var(--gutter), calc((100vw - 1280px) / 2 + var(--gutter)));
+}
+
+.eyebrow {
+  color: var(--charcoal-950);
+}
+
+.eyebrow::before {
+  box-shadow: none;
+}
+
+.band h2 {
+  margin-top: 20px;
+  font-size: clamp(2.4rem, 4.3vw, 4.4rem);
+  font-stretch: 118%;
+  color: var(--charcoal-950);
+}
+
+.copy p:not(:global(.eyebrow)) {
+  margin-top: 22px;
+  max-width: 46ch;
+  font-size: 1.05rem;
+  color: rgba(11, 13, 16, 0.78);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.emailGroup {
+  display: flex;
+  align-items: stretch;
+}
+
+/* square copy tile fused to the right of the email button */
+.copyBtn {
+  margin-left: -1px;
+}
+
+.copyBtn button {
+  width: 54px;
+  height: auto;
+}
+
+.lineBtn {
+  border-color: rgba(11, 13, 16, 0.4);
+  color: var(--charcoal-950);
+}
+
+.lineBtn::before {
+  background: var(--charcoal-950);
+}
+
+.lineBtn:hover {
+  border-color: var(--charcoal-950);
+  color: var(--volt);
+  box-shadow: none;
+}
+
+.shot {
+  clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+  display: grid;
+  place-items: center;
+}
+
+.price {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+}
+
+.price > span {
+  grid-area: 1 / 1;
+}
+
+.priceMain,
+.priceGhost {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-stretch: 125%;
+  font-style: italic;
+  font-size: clamp(6rem, 16vw, 14rem);
+  line-height: 0.8;
+  letter-spacing: -0.04em;
+}
+
+.priceMain {
+  color: var(--white);
+  text-shadow: 0 0 60px rgba(31, 111, 255, 0.8);
+  transition: transform 0.6s var(--ease-kinetic);
+}
+
+/* motion-blur trail behind the price */
+.priceGhost {
+  color: var(--volt);
+  filter: blur(10px);
+  opacity: 0.45;
+  transform: translateX(-9%);
+  transition: transform 0.6s var(--ease-kinetic), opacity 0.4s ease;
+}
+
+.priceGhost:nth-child(2) {
+  color: var(--white);
+  filter: blur(5px);
+  opacity: 0.3;
+  transform: translateX(-4.5%);
+}
+
+.shot:hover .priceMain {
+  transform: translateX(3%);
+}
+
+.shot:hover .priceGhost {
+  transform: translateX(-16%);
+  opacity: 0.6;
+}
+
+.priceNote {
+  grid-area: 2 / 1 !important;
+  margin-top: 18px;
+  padding: 6px 10px;
+  background: var(--charcoal-950);
+  color: var(--volt);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+  .copy {
+    padding: 88px var(--gutter) 64px;
+  }
+  .shot {
+    min-height: 320px;
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .priceMain,
+  .priceGhost {
+    transition: none;
+  }
+}

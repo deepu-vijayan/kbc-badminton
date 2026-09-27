@@ -1,0 +1,63 @@
+.card {
+  position: relative;
+  margin: 0;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--blue);
+  box-shadow: 0 0 0 1px rgba(31, 111, 255, 0.25), 0 0 48px -12px var(--blue-glow);
+  color: var(--fg);
+  transform: perspective(1400px) rotateY(-10deg) rotateX(6deg) rotateZ(1.5deg);
+  transition: transform 0.8s var(--ease-kinetic), box-shadow 0.5s ease,
+    border-color 0.4s ease;
+}
+
+.card:hover {
+  transform: none;
+  border-color: var(--volt);
+  box-shadow: 0 0 0 1px var(--volt), 0 0 56px -10px var(--volt-glow);
+}
+
+/* volt corner brackets */
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border-color: var(--volt);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.card::before {
+  top: -8px;
+  left: -8px;
+  border-width: 2px 0 0 2px;
+}
+
+.card::after {
+  bottom: -8px;
+  right: -8px;
+  border-width: 0 2px 2px 0;
+}
+
+.card svg {
+  width: 100%;
+  height: auto;
+}
+
+.card figcaption {
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transform: none;
+    transition: none;
+  }
+}
