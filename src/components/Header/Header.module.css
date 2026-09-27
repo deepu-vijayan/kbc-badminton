@@ -23,17 +23,72 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   text-decoration: none;
   color: var(--white);
 }
 
-.brand svg {
-  transition: transform 0.5s var(--ease-kinetic);
+/* White badge tile for the crest (the PNG has a white background),
+   framed with volt corner brackets like the site's cards. */
+.logoBadge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 52px;
+  aspect-ratio: 512 / 413;
+  padding: 4px;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px rgba(212, 255, 31, 0.5), 0 0 22px -6px var(--volt-glow);
+  transition: transform 0.5s var(--ease-kinetic), box-shadow 0.35s ease,
+    height 0.3s ease;
 }
 
-.brand:hover svg {
-  transform: translateX(4px) rotate(-12deg);
+.logoBadge::before,
+.logoBadge::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: var(--volt);
+  border-style: solid;
+  pointer-events: none;
+  transition: transform 0.4s var(--ease-kinetic);
+}
+
+.logoBadge::before {
+  top: -5px;
+  left: -5px;
+  border-width: 2px 0 0 2px;
+}
+
+.logoBadge::after {
+  bottom: -5px;
+  right: -5px;
+  border-width: 0 2px 2px 0;
+}
+
+.logoBadge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand:hover .logoBadge {
+  transform: translateY(-2px) rotate(-2deg);
+  box-shadow: 0 0 0 1px var(--volt), 0 0 28px -4px var(--volt-glow);
+}
+
+.brand:hover .logoBadge::before {
+  transform: translate(-3px, -3px);
+}
+
+.brand:hover .logoBadge::after {
+  transform: translate(3px, 3px);
+}
+
+/* shrink with the header once it goes compact */
+.scrolled .logoBadge {
+  height: 44px;
 }
 
 .brandText {
@@ -154,6 +209,10 @@
 }
 
 @media (max-width: 880px) {
+  .logoBadge,
+  .scrolled .logoBadge {
+    height: 42px;
+  }
   .links {
     position: fixed;
     inset: 0;

@@ -11,6 +11,15 @@ export const CLUB = {
     "Please park only in the bay allocated to Unit 7 — other bays belong to neighbouring units.",
 };
 
+// Official club crest. White background (no transparency), so the header
+// mounts it on a white badge tile rather than directly on charcoal.
+export const LOGO = {
+  src: `${import.meta.env.BASE_URL}brand/kbc-logo.png`,
+  width: 512,
+  height: 413,
+  alt: "KBC NSW Australia badminton club logo",
+};
+
 const ADDRESS_QUERY = "Unit 7, 175-179 James Ruse Drive, Camellia NSW 2142";
 
 export const LINKS = {

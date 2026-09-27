@@ -1,8 +1,7 @@
 import { useState } from "react";
 import Button from "../Button/Button";
-import ShuttleIcon from "../ShuttleIcon/ShuttleIcon";
 import useScrollHeader from "../../hooks/useScrollHeader";
-import { CLUB, LINKS, NAV_LINKS } from "../../data/content";
+import { CLUB, LINKS, LOGO, NAV_LINKS } from "../../data/content";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -20,7 +19,15 @@ export default function Header() {
   return (
     <header className={headerClasses}>
       <a className={styles.brand} href="#top">
-        <ShuttleIcon size={34} feathers={3} spread={22} />
+        <span className={styles.logoBadge}>
+          <img
+            src={LOGO.src}
+            alt={LOGO.alt}
+            width={LOGO.width}
+            height={LOGO.height}
+            decoding="async"
+          />
+        </span>
         <span className={styles.brandText}>
           <b>KBC</b>
           <span>{CLUB.name} · {CLUB.suburb.split(",")[0]}</span>
